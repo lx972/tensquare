@@ -1,0 +1,23 @@
+server:
+  port: 20001
+spring:
+  application:
+    name: article
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.43.33:3306/tensquare_article?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 1234
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9001/eureka
+    fetch-registry: false
+  instance:
+    prefer-ip-address: true
+
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
