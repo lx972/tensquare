@@ -3,12 +3,12 @@ package cn.lx.tensquare.article.service.impl;
 import cn.lx.tensquare.article.dao.ChannelMapper;
 import cn.lx.tensquare.article.pojo.Channel;
 import cn.lx.tensquare.article.service.ChannelService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import cn.lx.tensquare.utils.IdWorker;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -23,6 +23,9 @@ public class ChannelServiceImpl implements ChannelService {
     @Autowired
     private ChannelMapper channelMapper;
 
+    @Autowired
+    private IdWorker idWorker;
+
 
     /**
      * Channel条件+分页查询
@@ -32,13 +35,14 @@ public class ChannelServiceImpl implements ChannelService {
      * @return 分页结果
      */
     @Override
-    public PageInfo<Channel> findPage(Channel channel, int page, int size){
+    public Page<Channel> findPage(Channel channel, int page, int size){
         //分页
-        PageHelper.startPage(page,size);
+        Page<Channel> page1 = new Page<>(page, size);
         //搜索条件构建
-        Example example = createExample(channel);
+        QueryWrapper<Channel> queryWrapper = createWrapper(channel);
         //执行搜索
-        return new PageInfo<Channel>(channelMapper.selectByExample(example));
+        Page<Channel> pageInfo = (Page<Channel>) channelMapper.selectPage(page1, queryWrapper);
+        return pageInfo;
     }
 
     /**
@@ -48,11 +52,13 @@ public class ChannelServiceImpl implements ChannelService {
      * @return
      */
     @Override
-    public PageInfo<Channel> findPage(int page, int size){
+    public Page<Channel> findPage(int page, int size){
         //静态分页
-        PageHelper.startPage(page,size);
+        Page<Channel> page1 = new Page<>(page, size);
         //分页查询
-        return new PageInfo<Channel>(channelMapper.selectAll());
+        QueryWrapper<Channel> queryWrapper = new QueryWrapper<>();
+        Page<Channel> pageInfo = (Page<Channel>) channelMapper.selectPage(page1, queryWrapper);
+        return pageInfo;
     }
 
     /**
@@ -63,9 +69,9 @@ public class ChannelServiceImpl implements ChannelService {
     @Override
     public List<Channel> findList(Channel channel){
         //构建查询条件
-        Example example = createExample(channel);
+        QueryWrapper<Channel> queryWrapper = createWrapper(channel);
         //根据构建的条件查询数据
-        return channelMapper.selectByExample(example);
+        return channelMapper.selectList(queryWrapper);
     }
 
 
@@ -74,24 +80,23 @@ public class ChannelServiceImpl implements ChannelService {
      * @param channel
      * @return
      */
-    public Example createExample(Channel channel){
-        Example example=new Example(Channel.class);
-        Example.Criteria criteria = example.createCriteria();
+    public QueryWrapper<Channel> createWrapper(Channel channel){
+        QueryWrapper<Channel> queryWrapper = new QueryWrapper<>();
         if(channel!=null){
             // ID
             if(!StringUtils.isEmpty(channel.getId())){
-                    criteria.andEqualTo("id",channel.getId());
+                    queryWrapper.eq("id",channel.getId());
             }
             // 频道名称
             if(!StringUtils.isEmpty(channel.getName())){
-                    criteria.andLike("name","%"+channel.getName()+"%");
+                    queryWrapper.eq("name","%"+channel.getName()+"%");
             }
             // 状态
             if(!StringUtils.isEmpty(channel.getState())){
-                    criteria.andEqualTo("state",channel.getState());
+                    queryWrapper.eq("state",channel.getState());
             }
         }
-        return example;
+        return queryWrapper;
     }
 
     /**
@@ -100,7 +105,7 @@ public class ChannelServiceImpl implements ChannelService {
      */
     @Override
     public void delete(String id){
-        channelMapper.deleteByPrimaryKey(id);
+        channelMapper.deleteById(id);
     }
 
     /**
@@ -109,7 +114,7 @@ public class ChannelServiceImpl implements ChannelService {
      */
     @Override
     public void update(Channel channel){
-        channelMapper.updateByPrimaryKey(channel);
+        channelMapper.updateById(channel);
     }
 
     /**
@@ -118,6 +123,8 @@ public class ChannelServiceImpl implements ChannelService {
      */
     @Override
     public void add(Channel channel){
+        //设置主键值
+        channel.setId(idWorker.nextId()+"");
         channelMapper.insert(channel);
     }
 
@@ -128,7 +135,7 @@ public class ChannelServiceImpl implements ChannelService {
      */
     @Override
     public Channel findById(String id){
-        return  channelMapper.selectByPrimaryKey(id);
+        return  channelMapper.selectById(id);
     }
 
     /**
@@ -137,6 +144,6 @@ public class ChannelServiceImpl implements ChannelService {
      */
     @Override
     public List<Channel> findAll() {
-        return channelMapper.selectAll();
+        return channelMapper.selectList(null);
     }
 }

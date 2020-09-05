@@ -3,12 +3,12 @@ package cn.lx.tensquare.article.service.impl;
 import cn.lx.tensquare.article.dao.ItemMapper;
 import cn.lx.tensquare.article.pojo.Item;
 import cn.lx.tensquare.article.service.ItemService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import cn.lx.tensquare.utils.IdWorker;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -23,6 +23,9 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemMapper itemMapper;
 
+    @Autowired
+    private IdWorker idWorker;
+
 
     /**
      * Item条件+分页查询
@@ -32,13 +35,14 @@ public class ItemServiceImpl implements ItemService {
      * @return 分页结果
      */
     @Override
-    public PageInfo<Item> findPage(Item item, int page, int size){
+    public Page<Item> findPage(Item item, int page, int size){
         //分页
-        PageHelper.startPage(page,size);
+        Page<Item> page1 = new Page<>(page, size);
         //搜索条件构建
-        Example example = createExample(item);
+        QueryWrapper<Item> queryWrapper = createWrapper(item);
         //执行搜索
-        return new PageInfo<Item>(itemMapper.selectByExample(example));
+        Page<Item> pageInfo = (Page<Item>) itemMapper.selectPage(page1, queryWrapper);
+        return pageInfo;
     }
 
     /**
@@ -48,11 +52,13 @@ public class ItemServiceImpl implements ItemService {
      * @return
      */
     @Override
-    public PageInfo<Item> findPage(int page, int size){
+    public Page<Item> findPage(int page, int size){
         //静态分页
-        PageHelper.startPage(page,size);
+        Page<Item> page1 = new Page<>(page, size);
         //分页查询
-        return new PageInfo<Item>(itemMapper.selectAll());
+        QueryWrapper<Item> queryWrapper = new QueryWrapper<>();
+        Page<Item> pageInfo = (Page<Item>) itemMapper.selectPage(page1, queryWrapper);
+        return pageInfo;
     }
 
     /**
@@ -63,9 +69,9 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> findList(Item item){
         //构建查询条件
-        Example example = createExample(item);
+        QueryWrapper<Item> queryWrapper = createWrapper(item);
         //根据构建的条件查询数据
-        return itemMapper.selectByExample(example);
+        return itemMapper.selectList(queryWrapper);
     }
 
 
@@ -74,40 +80,39 @@ public class ItemServiceImpl implements ItemService {
      * @param item
      * @return
      */
-    public Example createExample(Item item){
-        Example example=new Example(Item.class);
-        Example.Criteria criteria = example.createCriteria();
+    public QueryWrapper<Item> createWrapper(Item item){
+        QueryWrapper<Item> queryWrapper = new QueryWrapper<>();
         if(item!=null){
             // ID
             if(!StringUtils.isEmpty(item.getId())){
-                    criteria.andEqualTo("id",item.getId());
+                    queryWrapper.eq("id",item.getId());
             }
             // 专栏名称
             if(!StringUtils.isEmpty(item.getName())){
-                    criteria.andLike("name","%"+item.getName()+"%");
+                    queryWrapper.eq("name","%"+item.getName()+"%");
             }
             // 专栏简介
             if(!StringUtils.isEmpty(item.getSummary())){
-                    criteria.andEqualTo("summary",item.getSummary());
+                    queryWrapper.eq("summary",item.getSummary());
             }
             // 用户ID
             if(!StringUtils.isEmpty(item.getUserid())){
-                    criteria.andEqualTo("userid",item.getUserid());
+                    queryWrapper.eq("userid",item.getUserid());
             }
             // 申请日期
             if(!StringUtils.isEmpty(item.getCreatetime())){
-                    criteria.andEqualTo("createtime",item.getCreatetime());
+                    queryWrapper.eq("createtime",item.getCreatetime());
             }
             // 审核日期
             if(!StringUtils.isEmpty(item.getChecktime())){
-                    criteria.andEqualTo("checktime",item.getChecktime());
+                    queryWrapper.eq("checktime",item.getChecktime());
             }
             // 状态
             if(!StringUtils.isEmpty(item.getState())){
-                    criteria.andEqualTo("state",item.getState());
+                    queryWrapper.eq("state",item.getState());
             }
         }
-        return example;
+        return queryWrapper;
     }
 
     /**
@@ -116,7 +121,7 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public void delete(String id){
-        itemMapper.deleteByPrimaryKey(id);
+        itemMapper.deleteById(id);
     }
 
     /**
@@ -125,7 +130,7 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public void update(Item item){
-        itemMapper.updateByPrimaryKey(item);
+        itemMapper.updateById(item);
     }
 
     /**
@@ -134,6 +139,8 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public void add(Item item){
+        //设置主键值
+        item.setId(idWorker.nextId()+"");
         itemMapper.insert(item);
     }
 
@@ -144,7 +151,7 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public Item findById(String id){
-        return  itemMapper.selectByPrimaryKey(id);
+        return  itemMapper.selectById(id);
     }
 
     /**
@@ -153,6 +160,6 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public List<Item> findAll() {
-        return itemMapper.selectAll();
+        return itemMapper.selectList(null);
     }
 }

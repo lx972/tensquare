@@ -1,11 +1,11 @@
 package cn.lx.tensquare.article.controller;
 
+import cn.lx.tensquare.article.pojo.Channel;
+import cn.lx.tensquare.article.service.ChannelService;
 import cn.lx.tensquare.entity.PageResult;
 import cn.lx.tensquare.entity.Result;
 import cn.lx.tensquare.entity.StatusCode;
-import cn.lx.tensquare.article.pojo.Channel;
-import cn.lx.tensquare.article.service.ChannelService;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /****
- * @Author:shenkunlin
+ * @Author:lx
  * @Description:
- * @Date 2019/6/14 0:18
+ * @Date 2020/9/5 10:33
  *****/
 @Api(value = "ChannelController")
 @RestController
@@ -41,8 +41,8 @@ public class ChannelController {
     @PostMapping(value = "/search/{page}/{size}" )
     public PageResult<Channel> findPage(@RequestBody(required = false) @ApiParam(name = "Channel对象",value = "传入JSON数据",required = false) Channel channel, @PathVariable  int page, @PathVariable  int size){
         //调用ChannelService实现分页条件查询Channel
-        PageInfo<Channel> pageInfo = channelService.findPage(channel, page, size);
-        return new PageResult<Channel>(pageInfo.getTotal(),pageInfo.getList());
+        Page<Channel> pageInfo = channelService.findPage(channel, page, size);
+        return new PageResult<Channel>(pageInfo.getTotal(),pageInfo.getRecords());
     }
 
     /***
@@ -59,12 +59,12 @@ public class ChannelController {
     @GetMapping(value = "/search/{page}/{size}" )
     public PageResult<Channel> findPage(@PathVariable  int page, @PathVariable  int size){
         //调用ChannelService实现分页查询Channel
-        PageInfo<Channel> pageInfo = channelService.findPage(page, size);
-        return new PageResult<Channel>(pageInfo.getTotal(),pageInfo.getList());
+        Page<Channel> pageInfo = channelService.findPage(page, size);
+        return new PageResult<Channel>(pageInfo.getTotal(),pageInfo.getRecords());
     }
 
     /***
-     * 多条件搜索品牌数据
+     * 多条件搜索Channel数据
      * @param channel
      * @return
      */
@@ -77,7 +77,7 @@ public class ChannelController {
     }
 
     /***
-     * 根据ID删除品牌数据
+     * 根据ID删除Channel数据
      * @param id
      * @return
      */

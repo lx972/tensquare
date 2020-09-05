@@ -1,14 +1,14 @@
 package cn.lx.tensquare.article.service;
 
 import cn.lx.tensquare.article.pojo.Channel;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import java.util.List;
 
 /****
- * @Author:shenkunlin
+ * @Author:lx
  * @Description:Channel业务层接口
- * @Date 2019/6/14 0:16
+ * @Date 2020/9/5 10:33
  *****/
 public interface ChannelService {
 
@@ -19,7 +19,7 @@ public interface ChannelService {
      * @param size
      * @return
      */
-    PageInfo<Channel> findPage(Channel channel, int page, int size);
+    Page<Channel> findPage(Channel channel, int page, int size);
 
     /***
      * Channel分页查询
@@ -27,7 +27,7 @@ public interface ChannelService {
      * @param size
      * @return
      */
-    PageInfo<Channel> findPage(int page, int size);
+    Page<Channel> findPage(int page, int size);
 
     /***
      * Channel多条件搜索方法

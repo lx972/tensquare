@@ -1,14 +1,14 @@
 package cn.lx.tensquare.article.service;
 
 import cn.lx.tensquare.article.pojo.Item;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import java.util.List;
 
 /****
- * @Author:shenkunlin
+ * @Author:lx
  * @Description:Item业务层接口
- * @Date 2019/6/14 0:16
+ * @Date 2020/9/5 10:33
  *****/
 public interface ItemService {
 
@@ -19,7 +19,7 @@ public interface ItemService {
      * @param size
      * @return
      */
-    PageInfo<Item> findPage(Item item, int page, int size);
+    Page<Item> findPage(Item item, int page, int size);
 
     /***
      * Item分页查询
@@ -27,7 +27,7 @@ public interface ItemService {
      * @param size
      * @return
      */
-    PageInfo<Item> findPage(int page, int size);
+    Page<Item> findPage(int page, int size);
 
     /***
      * Item多条件搜索方法

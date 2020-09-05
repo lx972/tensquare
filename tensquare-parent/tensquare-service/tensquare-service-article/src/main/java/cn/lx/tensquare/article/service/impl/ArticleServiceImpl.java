@@ -3,12 +3,12 @@ package cn.lx.tensquare.article.service.impl;
 import cn.lx.tensquare.article.dao.ArticleMapper;
 import cn.lx.tensquare.article.pojo.Article;
 import cn.lx.tensquare.article.service.ArticleService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import cn.lx.tensquare.utils.IdWorker;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -23,6 +23,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
 
+    @Autowired
+    private IdWorker idWorker;
+
 
     /**
      * Article条件+分页查询
@@ -32,13 +35,14 @@ public class ArticleServiceImpl implements ArticleService {
      * @return 分页结果
      */
     @Override
-    public PageInfo<Article> findPage(Article article, int page, int size){
+    public Page<Article> findPage(Article article, int page, int size){
         //分页
-        PageHelper.startPage(page,size);
+        Page<Article> page1 = new Page<>(page, size);
         //搜索条件构建
-        Example example = createExample(article);
+        QueryWrapper<Article> queryWrapper = createWrapper(article);
         //执行搜索
-        return new PageInfo<Article>(articleMapper.selectByExample(example));
+        Page<Article> pageInfo = (Page<Article>) articleMapper.selectPage(page1, queryWrapper);
+        return pageInfo;
     }
 
     /**
@@ -48,11 +52,13 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public PageInfo<Article> findPage(int page, int size){
+    public Page<Article> findPage(int page, int size){
         //静态分页
-        PageHelper.startPage(page,size);
+        Page<Article> page1 = new Page<>(page, size);
         //分页查询
-        return new PageInfo<Article>(articleMapper.selectAll());
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
+        Page<Article> pageInfo = (Page<Article>) articleMapper.selectPage(page1, queryWrapper);
+        return pageInfo;
     }
 
     /**
@@ -63,9 +69,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> findList(Article article){
         //构建查询条件
-        Example example = createExample(article);
+        QueryWrapper<Article> queryWrapper = createWrapper(article);
         //根据构建的条件查询数据
-        return articleMapper.selectByExample(example);
+        return articleMapper.selectList(queryWrapper);
     }
 
 
@@ -74,80 +80,79 @@ public class ArticleServiceImpl implements ArticleService {
      * @param article
      * @return
      */
-    public Example createExample(Article article){
-        Example example=new Example(Article.class);
-        Example.Criteria criteria = example.createCriteria();
+    public QueryWrapper<Article> createWrapper(Article article){
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
         if(article!=null){
             // ID
             if(!StringUtils.isEmpty(article.getId())){
-                    criteria.andEqualTo("id",article.getId());
+                    queryWrapper.eq("id",article.getId());
             }
             // 专栏ID
             if(!StringUtils.isEmpty(article.getColumnid())){
-                    criteria.andEqualTo("columnid",article.getColumnid());
+                    queryWrapper.eq("columnid",article.getColumnid());
             }
             // 用户ID
             if(!StringUtils.isEmpty(article.getUserid())){
-                    criteria.andEqualTo("userid",article.getUserid());
+                    queryWrapper.eq("userid",article.getUserid());
             }
             // 标题
             if(!StringUtils.isEmpty(article.getTitle())){
-                    criteria.andLike("title","%"+article.getTitle()+"%");
+                    queryWrapper.eq("title","%"+article.getTitle()+"%");
             }
             // 文章正文
             if(!StringUtils.isEmpty(article.getContent())){
-                    criteria.andEqualTo("content",article.getContent());
+                    queryWrapper.eq("content",article.getContent());
             }
             // 文章封面
             if(!StringUtils.isEmpty(article.getImage())){
-                    criteria.andEqualTo("image",article.getImage());
+                    queryWrapper.eq("image",article.getImage());
             }
             // 发表日期
             if(!StringUtils.isEmpty(article.getCreatetime())){
-                    criteria.andEqualTo("createtime",article.getCreatetime());
+                    queryWrapper.eq("createtime",article.getCreatetime());
             }
             // 修改日期
             if(!StringUtils.isEmpty(article.getUpdatetime())){
-                    criteria.andEqualTo("updatetime",article.getUpdatetime());
+                    queryWrapper.eq("updatetime",article.getUpdatetime());
             }
             // 是否公开
             if(!StringUtils.isEmpty(article.getIspublic())){
-                    criteria.andEqualTo("ispublic",article.getIspublic());
+                    queryWrapper.eq("ispublic",article.getIspublic());
             }
             // 是否置顶
             if(!StringUtils.isEmpty(article.getIstop())){
-                    criteria.andEqualTo("istop",article.getIstop());
+                    queryWrapper.eq("istop",article.getIstop());
             }
             // 浏览量
             if(!StringUtils.isEmpty(article.getVisits())){
-                    criteria.andEqualTo("visits",article.getVisits());
+                    queryWrapper.eq("visits",article.getVisits());
             }
             // 点赞数
             if(!StringUtils.isEmpty(article.getThumbup())){
-                    criteria.andEqualTo("thumbup",article.getThumbup());
+                    queryWrapper.eq("thumbup",article.getThumbup());
             }
             // 评论数
             if(!StringUtils.isEmpty(article.getComment())){
-                    criteria.andEqualTo("comment",article.getComment());
+                    queryWrapper.eq("comment",article.getComment());
             }
             // 审核状态
             if(!StringUtils.isEmpty(article.getState())){
-                    criteria.andEqualTo("state",article.getState());
+                    queryWrapper.eq("state",article.getState());
             }
             // 所属频道
             if(!StringUtils.isEmpty(article.getChannelid())){
-                    criteria.andEqualTo("channelid",article.getChannelid());
+                    queryWrapper.eq("channelid",article.getChannelid());
             }
             // URL
             if(!StringUtils.isEmpty(article.getUrl())){
-                    criteria.andEqualTo("url",article.getUrl());
+                    queryWrapper.eq("url",article.getUrl());
             }
             // 类型
             if(!StringUtils.isEmpty(article.getType())){
-                    criteria.andEqualTo("type",article.getType());
+                    queryWrapper.eq("type",article.getType());
             }
         }
-        return example;
+        return queryWrapper;
     }
 
     /**
@@ -156,7 +161,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public void delete(String id){
-        articleMapper.deleteByPrimaryKey(id);
+        articleMapper.deleteById(id);
     }
 
     /**
@@ -165,7 +170,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public void update(Article article){
-        articleMapper.updateByPrimaryKey(article);
+        articleMapper.updateById(article);
     }
 
     /**
@@ -174,6 +179,8 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public void add(Article article){
+        //设置主键值
+        article.setId(idWorker.nextId()+"");
         articleMapper.insert(article);
     }
 
@@ -184,7 +191,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public Article findById(String id){
-        return  articleMapper.selectByPrimaryKey(id);
+        return  articleMapper.selectById(id);
     }
 
     /**
@@ -193,6 +200,6 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public List<Article> findAll() {
-        return articleMapper.selectAll();
+        return articleMapper.selectList(null);
     }
 }

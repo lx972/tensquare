@@ -1,90 +1,90 @@
 package cn.lx.tensquare.article.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
 /****
- * @Author:shenkunlin
+ * @Author:lx
  * @Description:Article构建
- * @Date 2019/6/14 19:13
+ * @Date 2020/9/5 10:33
  *****/
 @ApiModel(description = "Article",value = "Article")
-@Table(name="tb_article")
+@TableName(value="tb_article")
 public class Article implements Serializable{
 
 	@ApiModelProperty(value = "ID",required = false)
-	@Id
-    @Column(name = "id")
+	@TableId(value = "id",type = IdType.INPUT)
 	private String id;//ID
 
 	@ApiModelProperty(value = "专栏ID",required = false)
-    @Column(name = "columnid")
+	@TableField(value = "columnid")
 	private String columnid;//专栏ID
 
 	@ApiModelProperty(value = "用户ID",required = false)
-    @Column(name = "userid")
+	@TableField(value = "userid")
 	private String userid;//用户ID
 
 	@ApiModelProperty(value = "标题",required = false)
-    @Column(name = "title")
+	@TableField(value = "title")
 	private String title;//标题
 
 	@ApiModelProperty(value = "文章正文",required = false)
-    @Column(name = "content")
+	@TableField(value = "content")
 	private String content;//文章正文
 
 	@ApiModelProperty(value = "文章封面",required = false)
-    @Column(name = "image")
+	@TableField(value = "image")
 	private String image;//文章封面
 
 	@ApiModelProperty(value = "发表日期",required = false)
-    @Column(name = "createtime")
+	@TableField(value = "createtime")
 	private Date createtime;//发表日期
 
 	@ApiModelProperty(value = "修改日期",required = false)
-    @Column(name = "updatetime")
+	@TableField(value = "updatetime")
 	private Date updatetime;//修改日期
 
 	@ApiModelProperty(value = "是否公开",required = false)
-    @Column(name = "ispublic")
+	@TableField(value = "ispublic")
 	private String ispublic;//是否公开
 
 	@ApiModelProperty(value = "是否置顶",required = false)
-    @Column(name = "istop")
+	@TableField(value = "istop")
 	private String istop;//是否置顶
 
 	@ApiModelProperty(value = "浏览量",required = false)
-    @Column(name = "visits")
+	@TableField(value = "visits")
 	private Integer visits;//浏览量
 
 	@ApiModelProperty(value = "点赞数",required = false)
-    @Column(name = "thumbup")
+	@TableField(value = "thumbup")
 	private Integer thumbup;//点赞数
 
 	@ApiModelProperty(value = "评论数",required = false)
-    @Column(name = "comment")
+	@TableField(value = "comment")
 	private Integer comment;//评论数
 
 	@ApiModelProperty(value = "审核状态",required = false)
-    @Column(name = "state")
+	@TableField(value = "state")
 	private String state;//审核状态
 
 	@ApiModelProperty(value = "所属频道",required = false)
-    @Column(name = "channelid")
+	@TableField(value = "channelid")
 	private String channelid;//所属频道
 
 	@ApiModelProperty(value = "URL",required = false)
-    @Column(name = "url")
+	@TableField(value = "url")
 	private String url;//URL
 
 	@ApiModelProperty(value = "类型",required = false)
-    @Column(name = "type")
+	@TableField(value = "type")
 	private String type;//类型
 
 

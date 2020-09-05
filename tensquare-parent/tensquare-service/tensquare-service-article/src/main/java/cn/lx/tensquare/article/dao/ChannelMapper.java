@@ -1,11 +1,11 @@
 package cn.lx.tensquare.article.dao;
 import cn.lx.tensquare.article.pojo.Channel;
-import tk.mybatis.mapper.common.Mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /****
- * @Author:shenkunlin
+ * @Author:lx
  * @Description:Channel的Dao
- * @Date 2019/6/14 0:12
+ * @Date 2020/9/5 10:33
  *****/
-public interface ChannelMapper extends Mapper<Channel> {
+public interface ChannelMapper extends BaseMapper<Channel> {
 }

@@ -23,10 +23,9 @@
         </dependency>
         <!--每个工程都有Pojo，都需要用到该包对应的注解-->
         <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <version>3.4.0</version>
         </dependency>
     </dependencies>
 

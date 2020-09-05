@@ -1,11 +1,11 @@
 package cn.lx.tensquare.article.controller;
 
+import cn.lx.tensquare.article.pojo.Article;
+import cn.lx.tensquare.article.service.ArticleService;
 import cn.lx.tensquare.entity.PageResult;
 import cn.lx.tensquare.entity.Result;
 import cn.lx.tensquare.entity.StatusCode;
-import cn.lx.tensquare.article.pojo.Article;
-import cn.lx.tensquare.article.service.ArticleService;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /****
- * @Author:shenkunlin
+ * @Author:lx
  * @Description:
- * @Date 2019/6/14 0:18
+ * @Date 2020/9/5 10:33
  *****/
 @Api(value = "ArticleController")
 @RestController
@@ -41,8 +41,8 @@ public class ArticleController {
     @PostMapping(value = "/search/{page}/{size}" )
     public PageResult<Article> findPage(@RequestBody(required = false) @ApiParam(name = "Article对象",value = "传入JSON数据",required = false) Article article, @PathVariable  int page, @PathVariable  int size){
         //调用ArticleService实现分页条件查询Article
-        PageInfo<Article> pageInfo = articleService.findPage(article, page, size);
-        return new PageResult<Article>(pageInfo.getTotal(),pageInfo.getList());
+        Page<Article> pageInfo = articleService.findPage(article, page, size);
+        return new PageResult<Article>(pageInfo.getTotal(),pageInfo.getRecords());
     }
 
     /***
@@ -59,12 +59,12 @@ public class ArticleController {
     @GetMapping(value = "/search/{page}/{size}" )
     public PageResult<Article> findPage(@PathVariable  int page, @PathVariable  int size){
         //调用ArticleService实现分页查询Article
-        PageInfo<Article> pageInfo = articleService.findPage(page, size);
-        return new PageResult<Article>(pageInfo.getTotal(),pageInfo.getList());
+        Page<Article> pageInfo = articleService.findPage(page, size);
+        return new PageResult<Article>(pageInfo.getTotal(),pageInfo.getRecords());
     }
 
     /***
-     * 多条件搜索品牌数据
+     * 多条件搜索Article数据
      * @param article
      * @return
      */
@@ -77,7 +77,7 @@ public class ArticleController {
     }
 
     /***
-     * 根据ID删除品牌数据
+     * 根据ID删除Article数据
      * @param id
      * @return
      */
