@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/mongo-test/mongo-test.iml" filepath="$PROJECT_DIR$/mongo-test/mongo-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/tensquare.iml" filepath="$PROJECT_DIR$/.idea/tensquare.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-common/tensquare-common.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-common/tensquare-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-common-db/tensquare-common-db.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-common-db/tensquare-common-db.iml" />
@@ -12,6 +13,8 @@
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-api.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service/tensquare-service-article/tensquare-service-article.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service/tensquare-service-article/tensquare-service-article.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-article-api/tensquare-service-article-api.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-article-api/tensquare-service-article-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service/tensquare-service-comment/tensquare-service-comment.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service/tensquare-service-comment/tensquare-service-comment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-comment-api/tensquare-service-comment-api.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-comment-api/tensquare-service-comment-api.iml" />
     </modules>
   </component>
 </project>

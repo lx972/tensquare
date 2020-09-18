@@ -1,0 +1,19 @@
+server:
+  port: 20002
+spring:
+  application:
+    name: comment
+
+  data:
+    mongodb:
+      database: tensquare_comment
+      host: 192.168.43.33
+      port: 27017
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9001/eureka
+    fetch-registry: false
+  instance:
+    prefer-ip-address: true

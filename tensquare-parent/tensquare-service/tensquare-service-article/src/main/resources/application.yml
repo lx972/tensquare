@@ -9,6 +9,12 @@ spring:
     username: root
     password: 1234
 
+  data:
+    mongodb:
+      database: tensquare_article
+      host: 192.168.43.33
+      port: 27017
+
 eureka:
   client:
     service-url:
@@ -32,3 +38,4 @@ mybatis-plus:
       lazyLoadingEnabled: true #延时加载的开关
       multipleResultSetsEnabled: true #开启延时加载，否则按需加载属性
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
+

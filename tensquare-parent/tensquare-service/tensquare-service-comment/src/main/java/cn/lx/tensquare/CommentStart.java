@@ -1,7 +1,6 @@
-package cn.lx.tensquare.article;
+package cn.lx.tensquare;
 
 import cn.lx.tensquare.utils.IdWorker;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -16,11 +15,10 @@ import org.springframework.context.annotation.Bean;
  */
 @SpringBootApplication
 @EnableEurekaClient
-@MapperScan("cn.lx.tensquare.article.dao")
-public class ArticleStart {
+public class CommentStart {
 
     public static void main(String[] args) {
-        SpringApplication.run(ArticleStart.class, args);
+        SpringApplication.run(CommentStart.class, args);
     }
 
     @Bean
