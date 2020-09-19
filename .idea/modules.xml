@@ -6,8 +6,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/tensquare.iml" filepath="$PROJECT_DIR$/.idea/tensquare.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-common/tensquare-common.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-common/tensquare-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-common-db/tensquare-common-db.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-common-db/tensquare-common-db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-gateway/tensquare-encrypt-gateway/tensquare-encrypt-gateway.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-gateway/tensquare-encrypt-gateway/tensquare-encrypt-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-zuul/tensquare-encrypt-zuul/tensquare-encrypt-zuul.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-zuul/tensquare-encrypt-zuul/tensquare-encrypt-zuul.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-eureka-cluster/tensquare-eureka-cluster.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-eureka-cluster/tensquare-eureka-cluster.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-eureka-cluster/tensquare-eureka1/tensquare-eureka1.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-eureka-cluster/tensquare-eureka1/tensquare-eureka1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-gateway/tensquare-gateway.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-gateway/tensquare-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-parent.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service/tensquare-service.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service/tensquare-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-api.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-api.iml" />
@@ -15,6 +18,9 @@
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-article-api/tensquare-service-article-api.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-article-api/tensquare-service-article-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service/tensquare-service-comment/tensquare-service-comment.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service/tensquare-service-comment/tensquare-service-comment.iml" />
       <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-comment-api/tensquare-service-comment-api.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-comment-api/tensquare-service-comment-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service/tensquare-service-user/tensquare-service-user.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service/tensquare-service-user/tensquare-service-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-user-api/tensquare-service-user-api.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-service-api/tensquare-service-user-api/tensquare-service-user-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tensquare-parent/tensquare-zuul/tensquare-zuul.iml" filepath="$PROJECT_DIR$/tensquare-parent/tensquare-zuul/tensquare-zuul.iml" />
     </modules>
   </component>
 </project>

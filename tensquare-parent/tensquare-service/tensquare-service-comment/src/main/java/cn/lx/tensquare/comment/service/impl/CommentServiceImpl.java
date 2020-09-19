@@ -37,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
 
     @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String,String> redisTemplate;
 
     /**
      * 根据id查询评论信息
@@ -108,23 +108,29 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     public boolean thumbup(String id, String userId) {
-        //判断是否重复点赞
-        if (redisTemplate.boundHashOps("thumbup").hasKey(id+"_"+userId)){
-            //说明该用户已经点赞
-            redisTemplate.boundHashOps("thumbup").delete(id+"_"+userId);
-            //取消点赞返回false
-            return false;
-        }
-        //说明该用户未点赞
-        Long thumbup = redisTemplate.boundHashOps("thumbup").increment(id+"_"+userId, 1);
         //查询条件
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
         //更新的数据
         Update update = new Update();
-        update.inc("thumbup",1);
+        //定义一个状态
+        boolean flag=true;
+        //判断是否重复点赞
+        if (redisTemplate.boundHashOps("thumbup").hasKey(id+"_"+userId)){
+            //说明该用户已经点赞
+            redisTemplate.boundHashOps("thumbup").delete(id+"_"+userId);
+            //评论数减一
+            update.inc("thumbup",-1);
+            //取消点赞返回false
+            flag=false;
+        }else {
+            //说明该用户未点赞
+            Long thumbup = redisTemplate.boundHashOps("thumbup").increment(id+"_"+userId, 1);
+            //评论数加一
+            update.inc("thumbup",1);
+        }
         mongoTemplate.updateFirst(query,update,"comment");
         //点赞成功返回true
-        return true;
+        return flag;
     }
 }

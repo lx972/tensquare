@@ -14,6 +14,8 @@
         <module>tensquare-eureka-cluster</module>
         <module>tensquare-common-db</module>
         <module>tensquare-service-api</module>
+        <module>tensquare-gateway</module>
+        <module>tensquare-zuul</module>
     </modules>
 
     <parent>

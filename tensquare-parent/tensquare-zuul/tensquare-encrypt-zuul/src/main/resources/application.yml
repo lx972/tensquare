@@ -1,0 +1,26 @@
+server:
+  port: 11001
+spring:
+  application:
+    name: zuul-encrypt
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9001/eureka
+    #从eureka获取数据
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+zuul:
+  routes:
+    article:
+      path: /article/** #配置请求URL的请求规则
+      serviceId: article #指定Eureka注册中心中的服务id
+      #是否去除前缀
+      strip-prefix: false
+      sentiviteHeaders:
+      #处理cookie及重定向问题
+      customSensitiveHeaders: true
