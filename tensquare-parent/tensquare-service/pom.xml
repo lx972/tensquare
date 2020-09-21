@@ -15,6 +15,7 @@
         <module>tensquare-service-article</module>
         <module>tensquare-service-comment</module>
         <module>tensquare-service-user</module>
+        <module>tensquare-service-notice</module>
     </modules>
 
 

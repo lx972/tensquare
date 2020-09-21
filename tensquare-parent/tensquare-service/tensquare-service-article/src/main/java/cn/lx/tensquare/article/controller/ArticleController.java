@@ -115,6 +115,9 @@ public class ArticleController {
     @ApiOperation(value = "Article添加",notes = "添加Article方法详情",tags = {"ArticleController"})
     @PostMapping
     public Result add(@RequestBody  @ApiParam(name = "Article对象",value = "传入JSON数据",required = true) Article article){
+        //通过令牌获取用户id
+        String userid="12";
+        article.setUserid(userid);
         //调用ArticleService实现添加Article
         articleService.add(article);
         return new Result(true,StatusCode.OK,"添加成功");
@@ -144,5 +147,33 @@ public class ArticleController {
         //调用ArticleService实现查询所有Article
         List<Article> list = articleService.findAll();
         return new Result<List<Article>>(true, StatusCode.OK,"查询成功",list) ;
+    }
+
+
+    @ApiOperation(value = "根据文章id订阅文章作者",notes = "根据文章id订阅文章作者方法详情",tags = {"ArticleController"})
+    @ApiImplicitParam(paramType = "path", name = "id", value = "文章ID", required = true, dataType = "String")
+    @PostMapping(value = "/subscribe/{id}")
+    public Result subscribe(@PathVariable("id") String id){
+        String userid="1";
+        //调用ArticleService实现订阅文章作者
+        Boolean flag = articleService.subscribe(id,userid);
+        if (flag){
+            return new Result(true, StatusCode.OK,"订阅成功") ;
+        }
+        return new Result(true, StatusCode.OK,"取消订阅") ;
+    }
+
+
+    @ApiOperation(value = "根据文章id点赞文章",notes = "根据文章id点赞文章方法详情",tags = {"ArticleController"})
+    @ApiImplicitParam(paramType = "path", name = "id", value = "文章ID", required = true, dataType = "String")
+    @PutMapping(value = "/thumbup/{id}")
+    public Result thumbup(@PathVariable("id") String id){
+        String userid="1";
+        //调用ArticleService实现点赞文章作者
+        Boolean flag = articleService.thumbup(id,userid);
+        if (flag){
+            return new Result(true, StatusCode.OK,"点赞成功") ;
+        }
+        return new Result(true, StatusCode.OK,"取消点赞") ;
     }
 }

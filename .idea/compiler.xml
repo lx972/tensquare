@@ -6,21 +6,25 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="tensquare-service-user" />
-        <module name="tensquare-service-user-api" />
-        <module name="tensquare-encrypt-zuul" />
-        <module name="mongo-test" />
-        <module name="tensquare-service-comment-api" />
-        <module name="tensquare-service-comment" />
-        <module name="tensquare-service-article-api" />
-        <module name="tensquare-common" />
-        <module name="tensquare-common-db" />
         <module name="tensquare-encrypt-gateway" />
-        <module name="tensquare-service-article" />
         <module name="tensquare-eureka1" />
+        <module name="tensquare-service-comment" />
+        <module name="tensquare-service-user" />
+        <module name="tensquare-encrypt-zuul" />
+        <module name="tensquare-common-db" />
+        <module name="tensquare-service-article" />
+        <module name="tensquare-service-user-api" />
+        <module name="tensquare-service-article-api" />
+        <module name="mongo-test" />
+        <module name="tensquare-service-notice-api" />
+        <module name="tensquare-service-notice" />
+        <module name="tensquare-common" />
+        <module name="tensquare-service-comment-api" />
+        <module name="io-test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="io-test" target="1.5" />
       <module name="mongo-test" target="1.5" />
       <module name="tensquare-common" target="1.8" />
       <module name="tensquare-common-db" target="1.8" />
@@ -36,6 +40,8 @@
       <module name="tensquare-service-article-api" target="1.8" />
       <module name="tensquare-service-comment" target="1.8" />
       <module name="tensquare-service-comment-api" target="1.8" />
+      <module name="tensquare-service-notice" target="1.8" />
+      <module name="tensquare-service-notice-api" target="1.8" />
       <module name="tensquare-service-user" target="1.8" />
       <module name="tensquare-service-user-api" target="1.8" />
       <module name="tensquare-zuul" target="1.8" />
@@ -57,6 +63,8 @@
       <module name="tensquare-service-article-api" options="-parameters" />
       <module name="tensquare-service-comment" options="-parameters" />
       <module name="tensquare-service-comment-api" options="-parameters" />
+      <module name="tensquare-service-notice" options="-parameters" />
+      <module name="tensquare-service-notice-api" options="-parameters" />
       <module name="tensquare-service-user" options="-parameters" />
       <module name="tensquare-service-user-api" options="-parameters" />
       <module name="tensquare-zuul" options="-parameters" />

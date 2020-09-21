@@ -66,4 +66,20 @@ public interface ArticleService {
      * @return
      */
     List<Article> findAll();
+
+    /**
+     * 根据文章id订阅文章作者
+     * @param id
+     * @param userid
+     * @return true 订阅成功，false 取消订阅
+     */
+    Boolean subscribe(String id, String userid);
+
+    /**
+     * 根据文章id点赞文章
+     * @param id
+     * @param userid
+     * @return  true 点赞成功，false 取消点赞
+     */
+    Boolean thumbup(String id, String userid);
 }

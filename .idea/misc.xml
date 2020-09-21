@@ -8,6 +8,7 @@
       <list>
         <option value="$PROJECT_DIR$/tensquare-parent/pom.xml" />
         <option value="$PROJECT_DIR$/mongo-test/pom.xml" />
+        <option value="$PROJECT_DIR$/io-test/pom.xml" />
       </list>
     </option>
   </component>

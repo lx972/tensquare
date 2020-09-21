@@ -15,6 +15,7 @@
         <module>tensquare-service-article-api</module>
         <module>tensquare-service-comment-api</module>
         <module>tensquare-service-user-api</module>
+        <module>tensquare-service-notice-api</module>
     </modules>
 
     <dependencies>

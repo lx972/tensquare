@@ -1,0 +1,62 @@
+server:
+  port: 20004
+spring:
+  application:
+    name: notice
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.43.33:3306/tensquare_notice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 1234
+
+  redis:
+    database: 1
+    host: 192.168.43.33
+    port: 6379
+
+  rabbitmq:
+    host: 192.168.43.33
+    username: admin
+    password: admin
+    port: 5672
+
+#启用feign服务熔断
+feign:
+  hystrix:
+    enabled: true
+
+#hystrix 配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+          #修改hystrix的隔离策略
+          strategy: SEMAPHORE
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9001/eureka
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+# Mybatis-Plus 配置
+mybatis-plus:
+  #  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: cn.lx.tensquare.notice.pojo
+  global-config:
+    id-type: 1  #0:数据库ID自增   1:用户输入id
+    db-column-underline: false
+    refresh-mapper: true
+    configuration:
+      map-underscore-to-camel-case: true
+      cache-enabled: true #配置的缓存的全局开关
+      lazyLoadingEnabled: true #延时加载的开关
+      multipleResultSetsEnabled: true #开启延时加载，否则按需加载属性
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
+
