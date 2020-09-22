@@ -12,6 +12,11 @@
     <artifactId>tensquare-common</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!--web起步依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

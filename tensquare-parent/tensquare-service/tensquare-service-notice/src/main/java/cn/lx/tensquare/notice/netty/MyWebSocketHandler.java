@@ -101,6 +101,13 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<TextWebSocke
         Result<Map<String, Integer>> result = new Result<>(true, StatusCode.OK, "获取消息数量成功", data);
         channel.writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(result)));
 
+        //清空队列中的消息，防止再次消费
+        if(sysNoticeCount>0){
+            rabbitAdmin.purgeQueue(sysQueueName);
+        }
+        if(userNoticeCount>0){
+            rabbitAdmin.purgeQueue(userQueueName);
+        }
         //为用户的消息通知队列注册监听器，便于用户在线的时候，
         //一旦有消息，可以主动推送给用户，不需要用户请求服务器获取数据
         sysNoticeContainer.addQueueNames(sysQueueName);
